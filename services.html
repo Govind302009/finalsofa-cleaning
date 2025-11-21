@@ -1,34 +1,55 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Services</title><link rel="stylesheet" href="styles.css"><script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js";
-  import { getFirestore } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-  import { getAuth } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
-  import { getStorage } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js";
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Services — Mahadev Fabric Care</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Firebase init (same as index) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+    import { getAuth } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+    import { getStorage } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js";
+    import { collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyDpxXFVedd9CHBPg5XFHelk0GoeIogoZRQ",
+      authDomain: "mahadev-fabric-care.firebaseapp.com",
+      projectId: "mahadev-fabric-care",
+      storageBucket: "mahadev-fabric-care.firebasestorage.app",
+      messagingSenderId: "202268296150",
+      appId: "1:202268296150:web:0a8e168d18d120144e1a77",
+      measurementId: "G-DYLTMEQMER"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    window.MF = window.MF || { app, db, collection, addDoc, onSnapshot };
+  </script>
+</head>
+<body>
+  <header class="container header">
+    <div class="brand"><div class="logo">M</div><div><strong>Mahadev Fabric Care</strong></div></div>
+  </header>
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDpxXFVedd9CHBPg5XFHelk0GoeIogoZRQ",
-    authDomain: "mahadev-fabric-care.firebaseapp.com",
-    projectId: "mahadev-fabric-care",
-    storageBucket: "mahadev-fabric-care.firebasestorage.app",
-    messagingSenderId: "202268296150",
-    appId: "1:202268296150:web:0a8e168d18d120144e1a77",
-    measurementId: "G-DYLTMEQMER"
-  };
+  <main class="container">
+    <h2>Our Services</h2>
+    <div class="services-grid">
+      <div class="card" onclick="openService('sofa')"><img src="sofa.jpg" alt=""><h4>Sofa Cleaning</h4><p>Deep-clean sofa fabrics</p></div>
+      <div class="card" onclick="openService('carpet')"><img src="carpet.jpg" alt=""><h4>Carpet Cleaning</h4><p>Professional carpet cleaning</p></div>
+      <div class="card" onclick="openService('steam')"><img src="steam.jpg" alt=""><h4>Steam Cleaning</h4><p>Sanitising steam services</p></div>
+      <div class="card" onclick="openService('nano')"><img src="nano.jpg" alt=""><h4>Nano Coating</h4><p>Protective nano coatings</p></div>
+    </div>
+  </main>
 
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  const db = getFirestore(app);
-  const auth = getAuth(app);
-  const storage = getStorage(app);
+  <div id="servicePopup" class="popup" style="display:none;align-items:center;justify-content:center">
+    <div class="box">
+      <span style="float:right;cursor:pointer" onclick="closeService()">✕</span>
+      <h3 id="popupTitle"></h3>
+      <p id="popupBody"></p>
+    </div>
+  </div>
 
-  window.MF = { app, analytics, db, auth, storage };
-</script>
-</head><body>
-<header class="container header"><div class="logo"><div class="mark">M</div><strong style="margin-left:10px">Mahadev Fabric Care</strong></div></header>
-<main class="container">
-  <h2>Services</h2>
-  <select id="service-select"><option value="">--Select--</option><option>Sofa Cleaning</option><option>Carpet Cleaning</option><option>Curtain Cleaning</option><option>Steam Cleaning</option><option>Nano Coating</option><option>Glass Coating</option></select>
-  <div id="service-details" class="card" style="margin-top:12px">Select a service</div>
-</main>
-<footer class="footer container">Contact: 9820399529</footer>
-<script src="site.js"></script></body></html>
+  <footer class="footer container">Contact: <a href="tel:+919820399529">9820399529</a></footer>
+  <script type="module" src="site.js"></script>
+</body>
+</html>
+
